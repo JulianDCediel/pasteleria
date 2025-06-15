@@ -1,0 +1,100 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel Empleados - Morita</title>
+    <link rel="stylesheet" href="{% static 'menu_empleados/menu_empleados.css' %}">
+</head>
+<body>
+<div class="admin-panel">
+    <aside>
+        <div class="brand">Morita</div>
+        <nav>
+            <a class="active" href="{% url 'prinAdmins'%}">Dashboard</a>
+            <a href="{% url 'gestProductos'%}">Productos</a>
+            <a href="#">Pedidos</a>
+            <a href="#">Finanzas</a>
+            <a href="{% url 'gestEmpleados'%}">Empleados</a>
+        </nav>
+        <div class="admin-info">
+            <span> <strong>{{ empleado.persona.nombre }} {{ empleado.persona.primer_apellido }}</strong> </span>
+            <span> <strong>{{ empleado.persona.correo}}</strong> </span>
+            <form action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                <button class="cerrar-sesion-btn" type="submit">Cerrar sesión</button>
+            </form>
+        </div>
+    </aside>
+    <main>
+        <header>
+            <h1>Panel Empleados</h1>
+            <ul class="tabs">
+                <li class="active">Resumen</li>
+                <li><a href="{% url 'gestProductos'%}">Productos</a></li>
+                <li><a href="#">Pedidos</a></li>
+                <li>Finanzas</li>
+                <li><a href="{% url 'gestEmpleados'%}">Empleados</a></li>
+            </ul>
+        </header>
+        <section class="summary">
+            <div class="card">
+                <p class="title">Pedidos hoy</p>
+                <h2>23</h2>
+                <small>Pedidos realizados</small>
+                <a href="#" class="btn">Ver pedidos</a>
+            </div>
+            <div class="card">
+                <p class="title">Productos activos</p>
+                <h2>18</h2>
+                <small>Productos en venta</small>
+                <a href="{% url 'gestProductos' %}" class="btn">Gestionar</a>
+            </div>
+            <div class="card">
+                <p class="title">Ingresos</p>
+                <h2>$4,200</h2>
+                <small>Ingresos del mes</small>
+                <a href="#" class="btn">Ver finanzas</a>
+            </div>
+        </section>
+        <section class="recent-orders">
+            <h3>Pedidos recientes</h3>
+            <table>
+                <tr>
+                    <th>Cliente</th>
+                    <th>#</th>
+                    <th>Producto</th>
+                    <th>Total</th>
+                    <th>Estado</th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <td>Ana López</td>
+                    <td>#1023</td>
+                    <td>Pastel de chocolate</td>
+                    <td>$350</td>
+                    <td>Entregado</td>
+                    <td>→</td>
+                </tr>
+                <tr>
+                    <td>Carlos Ruiz</td>
+                    <td>#1022</td>
+                    <td>Tarta de fresa</td>
+                    <td>$280</td>
+                    <td>En proceso</td>
+                    <td>→</td>
+                </tr>
+                <tr>
+                    <td>María Pérez</td>
+                    <td>#1021</td>
+                    <td>Cupcakes</td>
+                    <td>$150</td>
+                    <td>Pendiente</td>
+                    <td>→</td>
+                </tr>
+            </table>
+        </section>
+    </main>
+</div>
+</body>
+</html>
